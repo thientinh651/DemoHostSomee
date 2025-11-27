@@ -3,7 +3,7 @@ name: Deploy to Somee via FTP
 on:
   push:
     branches:
-      - main   # chạy khi push lên branch main
+      - main
 
 jobs:
   deploy:
@@ -13,17 +13,16 @@ jobs:
       - name: Checkout source code
         uses: actions/checkout@v3
 
-      # Nếu là project .NET hoặc NodeJS thì thêm bước build ở đây
-      # - name: Build project
-      #   run: dotnet publish -c Release -o ./publish
+      - name: Build project
+        run: dotnet publish -c Release -o ./publish
 
       - name: Upload files via FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
           server: ${{ secrets.FTP_HOST }}
-          username: ${{ secrets.FTP_USER}}
-          password: ${{ secrets.FTP_PASS}}
+          username: ${{ secrets.FTP_USER }}
+          password: ${{ secrets.FTP_PASS }}
           protocol: ftp
           port: 21
-          local-dir: ./NguyenPhucThienTinh_DH52201572
-          server-dir: /www.hostgit.somee.com/NguyenPhucThienTinh_DH52201572         # thư mục gốc trên hosting
+          local-dir: ./publish/
+          server-dir: /wwwroot/
