@@ -1,0 +1,46 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+
+@{
+    ViewData["Title"] = "Home Page";
+    var session = Context.Session.GetString("Khachhang");
+    Khachhang kh = null;
+    if (session != null)
+    {
+        kh = JsonConvert.DeserializeObject<Khachhang>(session);
+    }
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+
+    @if (session == null)
+    {
+        <p>Bạn cần đăng nhập để sử dụng các chức năng quản lý.</p>
+        <a asp-controller="KhachHang" asp-action="IndexDangNhap" class="btn btn-info btn-lg mt-3">
+            <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
+        </a>
+    }
+    else
+    {
+        <p>Xin chào, <strong>@kh.Tenkh</strong>! Chọn chức năng quản lý bên dưới:</p>
+
+        <div class="d-flex flex-column gap-3 col-6 mx-auto mt-4">
+            <a asp-controller="NhaSanXuat" asp-action="Index" class="btn btn-primary btn-lg">
+                Quản lý Nhà sản xuất
+            </a>
+            <a asp-controller="NhanVien" asp-action="Index" class="btn btn-success btn-lg">
+                Quản lý Nhân viên
+            </a>
+            <a asp-controller="KhachHang" asp-action="Index" class="btn btn-info btn-lg">
+                Quản lý Khách hàng
+            </a>
+            <a asp-controller="PhieuDat" asp-action="Index" class="btn btn-warning btn-lg">
+                Quản lý Phiếu đặt
+            </a>
+            <a asp-controller="HangHoa" asp-action="Index" class="btn btn-danger btn-lg">
+                Quản lý Hàng hóa
+            </a>
+        </div>
+    }
+</div>

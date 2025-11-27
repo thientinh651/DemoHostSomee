@@ -1,0 +1,44 @@
+﻿@model IEnumerable<NguyenPhucThienTinh_DH52201572.Models.Hanghoa>
+
+@{
+    ViewBag.Title = "Quản lý hàng hóa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mt-3">Quản lý hàng hóa</h2>
+
+<p>
+    @Html.ActionLink("Thêm hàng hóa", "Them", "HangHoa", null, new { @class = "btn btn-primary mb-3" })
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead class="table-dark">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.First().Mahang)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Tenhang)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Donvitinh)</th>
+            <th>@Html.DisplayNameFor(model => model.First().Dongia)</th>
+            <th>@Html.DisplayNameFor(model => model.First().MaloaiNavigation.Tenloai)</th>
+            <th>@Html.DisplayNameFor(model => model.First().MansxNavigation.Tennsx)</th>
+            <th>Thao tác</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Mahang)</td>
+                <td>@Html.DisplayFor(modelItem => item.Tenhang)</td>
+                <td>@Html.DisplayFor(modelItem => item.Donvitinh)</td>
+                <td>@Html.DisplayFor(modelItem => item.Dongia)</td>
+                <td>@Html.DisplayFor(modelItem => item.MaloaiNavigation.Tenloai)</td>
+                <td>@Html.DisplayFor(modelItem => item.MansxNavigation.Tennsx)</td>
+                <td>
+                    @Html.ActionLink("Sửa", "SuaHH", new { id = item.Mahang }, new { @class = "btn btn-sm btn-warning" }) |
+                    @Html.ActionLink("Chi tiết", "XemHH", new { id = item.Mahang }, new { @class = "btn btn-sm btn-info" }) |
+                    @Html.ActionLink("Xóa", "XoaHH", new { id = item.Mahang }, new { @class = "btn btn-sm btn-danger" })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

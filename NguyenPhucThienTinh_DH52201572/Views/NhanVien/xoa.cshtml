@@ -1,0 +1,24 @@
+﻿@model NguyenPhucThienTinh_DH52201572.Models.Nhasanxuat
+
+<div class="container">
+    <h2>Xóa nhân viên</h2>
+    <p>Mã NV: @Model.Mansx</p>
+    <p>Tên NV: @Model.Tennsx</p>
+    <p>Địa chỉ: @Model.Diachi</p>
+
+    @if (ViewBag.Cohang == true)
+    {
+        <div class="alert alert-danger">
+            Nhà sản xuất đã có hàng hóa liên quan, không thể xóa!
+        </div>
+        <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+    }
+    else
+    {
+        <form asp-action="Xoa" method="post">
+            <input type="hidden" asp-for="Mansx" />
+            <button type="submit" class="btn btn-danger">Xóa</button>
+            <a asp-action="Index" class="btn btn-secondary">Quay lại</a>
+        </form>
+    }
+</div>

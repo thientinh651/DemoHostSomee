@@ -1,0 +1,102 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Newtonsoft.Json
+
+@{
+    var session = Context.Session.GetString("Khachhang");
+    Khachhang kh = null;
+    if (session != null)
+    {
+        kh = JsonConvert.DeserializeObject<Khachhang>(session);
+    }
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css"
+          crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"
+            crossorigin="anonymous"></script>
+    <title>Documents</title>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="card">
+            <div class="card-header bg-secondary text-white">
+                Header
+            </div>
+
+            <div class="card-body">
+                <!-- Thanh menu -->
+                <div class="row">
+                    <div class="col-8">
+                        <div class="nav nav-tabs">
+                            <div class="nav-item bg-primary">
+                                <a asp-action="Index" asp-controller="Home" class="nav-link text-white">Trang chủ</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-4">
+                        <div class="nav nav-tabs float-right">
+                            @if (session == null)
+                            {
+                                <div class="nav-item bg-info">
+                                    <a asp-action="indexDangNhap" asp-controller="KhachHang" class="nav-link text-white">
+                                        <i class="fa-solid fa-right-to-bracket"></i> Đăng nhập
+                                    </a>
+                                </div>
+                                <div class="nav-item bg-primary">
+                                    <a asp-action="IndexDangKy" asp-controller="KhachHang" class="nav-link text-white">Đăng ký</a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="nav-item bg-danger">
+                                    <a asp-action="DangXuat" asp-controller="KhachHang" class="nav-link text-white">
+                                        <i class="fa-solid fa-right-from-bracket"></i> Đăng xuất
+                                    </a>
+                                </div>
+                                <div class="nav-item bg-info">
+                                    @*<span class="nav-link text-white">@kh.Tenkh</span>*@
+                                    <a asp-action="Index" asp-controller="KhachHang" class="list-group-item bg-info text-white">@kh.Tenkh</a>
+
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Chức năng quản lý -->
+                <div class="row mt-3">
+                    @if (session != null)
+                    {
+                        <div class="col-md-3">
+                            <ul class="list-group">
+                                <a asp-action="Index" asp-controller="NhaSanXuat" class="list-group-item bg-info text-white">Quản lý Nhà sản xuất</a>
+                                <a asp-action="Index" asp-controller="NhanVien" class="list-group-item bg-info text-white">Quản lý Nhân viên</a>
+                                <a asp-action="Index" asp-controller="KhachHang" class="list-group-item bg-info text-white">Quản lý Khách hàng</a>
+                                <a asp-action="Index" asp-controller="LoaiHangHoa" class="list-group-item bg-info text-white">Quản lý Loại hàng hóa</a>
+                                <a asp-action="Index" asp-controller="HangHoa" class="list-group-item bg-info text-white">Quản lý Hàng hóa</a>
+                            </ul>
+                        </div>
+                    }
+                    <div class="col-md-9">
+                        @RenderBody()
+                    </div>
+                </div>
+
+                <div class="card-footer bg-secondary text-white mt-3">
+                    Footer
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

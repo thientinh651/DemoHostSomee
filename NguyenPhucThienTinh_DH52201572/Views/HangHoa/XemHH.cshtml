@@ -1,0 +1,49 @@
+﻿@model NguyenPhucThienTinh_DH52201572.Models.Hanghoa
+
+@{
+    ViewBag.Title = "Thông tin hàng hóa";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2 class="mt-3">Thông tin hàng hóa</h2>
+
+<div class="card mb-4">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-4">
+                <img src="~/images/@Model.Hinh" alt="@Model.Tenhang" class="img-fluid border" />
+            </div>
+            <div class="col-md-8">
+                <dl class="row">
+                    <dt class="col-sm-4">Tên hàng:</dt>
+                    <dd class="col-sm-8">@Model.Tenhang</dd>
+
+                    <dt class="col-sm-4">Đơn vị tính:</dt>
+                    <dd class="col-sm-8">@Model.Donvitinh</dd>
+
+                    <dt class="col-sm-4">Đơn giá:</dt>
+                    <dd class="col-sm-8">@String.Format("{0:N0} VNĐ", Model.Dongia)</dd>
+
+                    <dt class="col-sm-4">Mã hàng:</dt>
+                    <dd class="col-sm-8">@Model.Mahang</dd>
+
+                    <dt class="col-sm-4">Mã loại hàng hóa:</dt>
+                    <dd class="col-sm-8">@Model.MaloaiNavigation?.Maloai</dd>
+
+                    <dt class="col-sm-4">Tên loại hàng hóa:</dt>
+                    <dd class="col-sm-8">@Model.MaloaiNavigation?.Tenloai</dd>
+
+                    <dt class="col-sm-4">Mã nhà sản xuất:</dt>
+                    <dd class="col-sm-8">@Model.MansxNavigation?.Mansx</dd>
+
+                    <dt class="col-sm-4">Tên nhà sản xuất:</dt>
+                    <dd class="col-sm-8">@Model.MansxNavigation?.Tennsx</dd>
+
+                    <dt class="col-sm-4">Địa chỉ nhà sản xuất:</dt>
+                    <dd class="col-sm-8">@Model.MansxNavigation?.Diachi</dd>
+                </dl>
+                <a asp-action="Index" class="btn btn-secondary mt-3">Trở về</a>
+            </div>
+        </div>
+    </div>
+</div>
