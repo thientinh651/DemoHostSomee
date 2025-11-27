@@ -1,0 +1,29 @@
+name: Deploy to Somee via FTP
+
+on:
+  push:
+    branches:
+      - main   # chạy khi push lên branch main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v3
+
+      # Nếu là project .NET hoặc NodeJS thì thêm bước build ở đây
+      # - name: Build project
+      #   run: dotnet publish -c Release -o ./publish
+
+      - name: Upload files via FTP
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_HOST }}
+          username: ${{ secrets.FTP_USER}}
+          password: ${{ secrets.FTP_PASS}}
+          protocol: ftp
+          port: 21
+          local-dir: ./publish   # thư mục chứa file build, đổi tùy project
+          server-dir: /          # thư mục gốc trên hosting
