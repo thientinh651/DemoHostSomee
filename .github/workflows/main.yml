@@ -25,5 +25,5 @@ jobs:
           password: ${{ secrets.FTP_PASS}}
           protocol: ftp
           port: 21
-          local-dir: ./publish   # thư mục chứa file build, đổi tùy project
-          server-dir: /          # thư mục gốc trên hosting
+          local-dir: ./NguyenPhucThienTinh_DH52201572
+          server-dir: /www.hostgit.somee.com/NguyenPhucThienTinh_DH52201572         # thư mục gốc trên hosting
